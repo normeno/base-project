@@ -157,7 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-
+        JsLocalization\JsLocalizationServiceProvider::class
     ],
 
     /*

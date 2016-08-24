@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+        $gate->define('admin-access', function () {
+
+            $permitted = [1,2];
+
+            foreach (\Auth::user()->roles as $role) {
+                if( in_array($role->id, $permitted) ) {
+                    return true;
+                }
+
+                return false;
+            }
+        });
     }
 }
